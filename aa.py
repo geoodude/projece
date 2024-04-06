@@ -54,7 +54,7 @@ def afegir_llibre():
     autor_afegir = input("Inserta autor del llibre ")
     any_de_publicacio_afegir = input("Inserta any de publicació del llibre")
     genere_afegir = input("Inserta genere del llibre")
-    isbn_afegir = input("Inserta any de publicació del llibre")
+    isbn_afegir = input("Inserta isbn del llibre")
     try:
         with open('Llibres.txt', "a") as fitxer:
             fitxer.write("\n" + titol_afegir + "|" +)
