@@ -57,10 +57,11 @@ def afegir_llibre():
     isbn_afegir = input("Inserta isbn del llibre")
     try:
         with open('Llibres.txt', "a") as fitxer:
-            fitxer.write("\n" + titol_afegir + "|" +)
+            fitxer.write("\n" + titol_afegir + "|" + autor_afegir + "|" + any_de_publicacio_afegir + "|" + genere_afegir + "|" + isbn_afegir)
     except FileNotFoundError:
         print("El fitxer 'Llibres.txt' no existeix.")
     
 
 
 
+afegir_llibre()
