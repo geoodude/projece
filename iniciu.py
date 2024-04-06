@@ -32,11 +32,29 @@ def tria():
   elif opcio == 2:
     mostrar_tots_llibres()
   elif opcio == 3:
-    Afegir()
+    afegir_llibre()
   elif opcio == 4:
     eliminar_llibre()
   elif opcio == 5:
     Editar()
+def afegir_llibre():
+    titol_afegir = input("Inserta el titol del llibre que vols afegir: \n")
+    llibres = llegir_llibres()
+    for linia in llibres:
+        titol, autor, any_de_publicacio, genere, isbn = linia.split("|")
+        if titol_afegir == titol:
+            print("\nEl titol de llibre que vols afegir ja existeix.")
+            return
+    autor_afegir = input("Inserta autor del llibre ")
+    any_de_publicacio_afegir = input("Inserta any de publicació del llibre")
+    genere_afegir = input("Inserta genere del llibre")
+    isbn_afegir = input("Inserta isbn del llibre")
+    try:
+        with open('Llibres.txt', "a") as fitxer:
+            
+            fitxer.write("\n" + titol_afegir + "|" + autor_afegir + "|" + any_de_publicacio_afegir + "|" + genere_afegir + "|" + isbn_afegir)
+    except FileNotFoundError:
+        print("El fitxer 'Llibres.txt' no existeix.")
 def mostrar_tots_llibres():
     llibres = llegir_llibres()
     numero = 0
@@ -86,16 +104,29 @@ def eliminar_llibre(nom_fitxer, titol_llibre):
             llibre_eliminat = True
 
 
-    if llibre_eliminat:
-        print(f'Llibre "{titol_llibre}" eliminat amb èxit.')
-    else:
-        print(f'Llibre "{titol_llibre}" no trobat.')
-
-
     with open(nom_fitxer, 'w') as fitxer:
         fitxer.writelines(llibres_modificats)
+def editar_llibre(archivo, camp_editar, valor_antiga, valor_nova):
+    with open(archivo, 'r') as f:
+        linees = f.readlines()
 
+    with open(archivo, 'w') as f:
+        for linia in linees:
+            parts = linia.split('|')
+            if parts[camp_editar].strip() == valor_antiga:
+                parts[camp_editar] = valor_nova
+                nova_linia = '|'.join(parts)
+                f.write(nova_linia)
+            else:
+                f.write(linia)
 
+def Editar():
+    arxiu = 'llibres.txt'  
+    camp_editar = int(input("que vols editar\n 0 Titol\n1 Autor\n Any de publicacio\n3 Gènere\n4 ISBN"))  
+    valor_antiga = input("que posava anterior ment")  
+    valor_nova = input("que vols que posi en el camp que has selecionat")  
+
+    editar_llibre(arxiu, camp_editar, valor_antiga, valor_nova)
 
 
 
