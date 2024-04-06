@@ -63,6 +63,4 @@ def afegir_llibre():
     
 
 
-afegir_llibre()
-
 
